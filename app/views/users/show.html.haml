@@ -1,0 +1,15 @@
+%h1
+  = @user.name
+%h2
+  Posts
+= render partial: 'posts/form', locals: { owner: @user, post: @user.wall_posts.build }
+
+%ul.post_stream
+  - @wall_posts.each do |wall_post|
+    %li.post
+      .content
+        = wall_post.content
+      .date
+        = wall_post.created_at
+      .user
+        = wall_post.author.try(:name)
